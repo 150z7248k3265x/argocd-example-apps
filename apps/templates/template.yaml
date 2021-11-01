@@ -10,12 +10,16 @@ spec:
   destination:
     namespace: default
     server: {{ $.Values.spec.destination.server }}
-  project: default
+  project: scs-{{ $.Values.spec.env}}
   source:
     path: {{ . }}
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}
     helm:
+    valueFiles:
+      - values.yaml
+      - values-{{ $.Values.spec.env}}.yaml
+      - values-{{ $.Values.spec.env}}-image.yaml
       releaseName: {{ . }}
   syncPolicy:
     automated:
