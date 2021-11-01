@@ -1,8 +1,8 @@
-{{- range .Values.spec.apps }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ . }}
+  name: {{ include "app.name" . }}-{{ include "app.env" . }}
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,10 +10,18 @@ spec:
   destination:
     namespace: default
     server: {{ $.Values.spec.destination.server }}
-  project: default
+  project: scs-{{ include "app.env" . }}
   source:
-    path: {{ . }}
+    path: {{ include "app.name" . }}
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}
----
-{{- end }}
+    helm:
+#      valueFiles:
+#        - values.yaml
+#        - values-{{ include "app.env" . }}.yaml
+#        - values-{{ include "app.env" . }}-image.yaml
+      releaseName: {{ include "app.name" . }}
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

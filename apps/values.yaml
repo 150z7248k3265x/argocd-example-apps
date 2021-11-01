@@ -7,3 +7,5 @@ spec:
   apps:
     - helm-guestbook
     - helm-hooks
+  env:
+    - dev
