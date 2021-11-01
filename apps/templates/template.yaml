@@ -16,10 +16,6 @@ spec:
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}
     helm:
-#      valueFiles:
-#        - values.yaml
-#        - values-{{ include "app.env" . }}.yaml
-#        - values-{{ include "app.env" . }}-image.yaml
       releaseName: {{ $.Values.spec.apps}}
   syncPolicy:
     automated:
