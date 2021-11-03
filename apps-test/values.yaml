@@ -1,0 +1,9 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/150z7248k3265x/argocd-example-apps
+    targetRevision: HEAD
+  apps:
+    - helm-guestbook
+    - helm-hooks
