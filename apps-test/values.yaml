@@ -6,4 +6,3 @@ spec:
     targetRevision: HEAD
   apps:
     - helm-guestbook
-    - helm-hooks
