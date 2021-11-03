@@ -1,9 +1,8 @@
 name: kangxin-webhook-test
 
 on:
-  push:
-    branches:
-      - master
+  repository_dispatch:
+    types: do-something
 
 jobs:
   build:
