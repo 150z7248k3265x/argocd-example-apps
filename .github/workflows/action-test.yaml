@@ -1,0 +1,14 @@
+name: kangxin-webhook-test2
+
+on:
+  repository_dispatch:
+    types: zhukangxin
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: echo "hello kangxin test2"
