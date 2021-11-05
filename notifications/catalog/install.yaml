@@ -191,10 +191,10 @@ data:
     webhook:
       github:
         method: POST
-        path: /repos/150z7248k3265x/argocd-example-apps/dispatches
+        path: /repos/150z7248k3265x/argocd-example-apps/actions/workflows/action-test.yaml/dispatches
         body: |
           {
-              "event_type": "do-something"
+              "ref": "master"
           }
   trigger.on-deployed: |
     - description: Application is synced and healthy. Triggered once per commit.
@@ -237,7 +237,7 @@ data:
     url: https://api.github.com
     headers: #optional headers
     - name: Accept
-      value: application/vnd.github.everest-preview+json
+      value: application/vnd.github.v3+json
     - name: Authorization
       value: token $github-token
 kind: ConfigMap
