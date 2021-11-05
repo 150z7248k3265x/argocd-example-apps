@@ -1,8 +1,16 @@
 name: kangxin-webhook-test2
 
 on:
-  repository_dispatch:
-    types: zhukangxin
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: false
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
 
 jobs:
   build:
