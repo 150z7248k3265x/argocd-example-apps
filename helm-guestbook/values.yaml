@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: gcr.io/heptio-images/ks-guestbook-demo
-  tag: 0.1
+  repository: 929574375zkx/helm-guestbook
+  tag: e8862a5e9f9031b6fb79e4e2179adf9f9f76f177
   pullPolicy: IfNotPresent
 
 service:
