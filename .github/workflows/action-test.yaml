@@ -30,3 +30,7 @@ jobs:
         with:
           token: "${{ secrets.DEPLOY_TOKEN }}"
           environment: test
+
+      - name: 'echo git commit tag'
+        run: echo $GITHUB_SHA
+        shell: bash
