@@ -1,16 +1,19 @@
 name: kangxin-webhook-test2
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: false
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
+  push:
+    branches:
+      - master
+#  workflow_dispatch:
+#    inputs:
+#      name:
+#        description: 'Person to greet'
+#        required: false
+#        default: 'Mona the Octocat'
+#      home:
+#        description: 'location'
+#        required: false
+#        default: 'The Octoverse'
 
 jobs:
   build:
@@ -20,3 +23,10 @@ jobs:
 
       - name: Run a one-line script
         run: echo "hello kangxin test2"
+
+      - uses: chrnorm/deployment-action@releases/v1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ secrets.DEPLOY_TOKEN }}"
+          environment: test
