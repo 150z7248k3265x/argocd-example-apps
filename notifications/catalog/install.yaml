@@ -191,10 +191,13 @@ data:
     webhook:
       github:
         method: POST
-        path: /repos/150z7248k3265x/argocd-example-apps/actions/workflows/action-test.yaml/dispatches
+        path: /repos/150z7248k3265x/argocd-example-apps/actions/workflows/callback.yaml/dispatches
         body: |
           {
-              "ref": "master"
+              "ref": "master",
+              "inputs": {
+                "git_image_tag": "{{ (call .repo.GetAppDetails).Helm.GetParameterValueByName "image.tag" }}"
+              }
           }
   trigger.on-deployed: |
     - description: Application is synced and healthy. Triggered once per commit.
@@ -227,6 +230,7 @@ data:
       send:
       - github-commit-status
       when: app.status.operationState.phase in ['Succeeded']
+#      oncePer: app.status.operationState.syncResult.revision
   # Notification services are used to deliver message.
   # Service definition might reference values from argocd-notifications-secret Secret using $my-key format
   # Service format key is: service.<type>.<optional-custom-name>
