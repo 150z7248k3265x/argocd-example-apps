@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update and Commit for ArgoCD Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: '=service fullname & fullnameOverride & release name'
+        required: true
+      ci_environment_name:
+        description: 'Need to deploy the environment'
+        required: true
+      image_tag:
+        description: 'container image sha'
+        required: true
+
+
+env:
+#  visibility-service
+  PROJECT_NAME: ${{ github.event.inputs.project_name }}
+  CI_ENVIRONMENT_NAME: ${{ github.event.inputs.ci_environment_name }}
+  IMAGE_TAG: ${{ github.event.inputs.image_tag }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  modify-build-deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Update for values-image.yaml
+        run: |-
+          sed -e "s/__TAG__/${{ env.IMAGE_TAG }}/g; \
+                  s/__ENV__/$CI_ENVIRONMENT_NAME/g; \
+                  s/__FULLNAME__/$PROJECT_NAME/g"   \
+                  ${{ env.PROJECT_NAME }}/values-image.tpl > \
+                  ${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
+        shell: bash
+
+      - run: ls -al ./${{ env.PROJECT_NAME }}
+        shell: bash
+
+      - run: cat ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
+        shell: bash
+
+#      - uses: EndBug/add-and-commit@v7
+#        with:
+#          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
+#          add: ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml --force
+
+
+
