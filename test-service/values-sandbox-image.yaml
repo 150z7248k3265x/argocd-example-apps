@@ -1,0 +1,4 @@
+image:
+  tag: sfdsfsdfsdfdsferwer
+env: sandbox
+fullnameOverride: test-service
