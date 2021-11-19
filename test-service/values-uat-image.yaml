@@ -1,0 +1,4 @@
+image:
+  tag: dfsfsdfsbvbvbv
+env: uat
+fullnameOverride: test-service
