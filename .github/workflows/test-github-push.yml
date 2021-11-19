@@ -56,24 +56,8 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git add ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
           git commit -am "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
-
-          success=0;
-          attempts=0;
-          until $success || [ $attempts = 10 ];
-          do
-              let ++attempts;
-              git pull --rebase;
-              git push;
-              success=$?;
-          done;
-          if ! $success;
-          then
-              echo "Gave up after $attempts attempts";
-          fi
-
-
-
-
+          git pull --rebase;
+          git push;
 
 #      - uses: EndBug/add-and-commit@v7
 #        with:
