@@ -49,20 +49,22 @@ jobs:
       - run: cat ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
         shell: bash
 
-      - name: Commit report
-        run: |
-          git config --global user.name '150z7248k3265x'
-          git config --global user.email '929574375@qq.com'
-          git remote set-url origin https://x-access-token:${{ secrets.KANGXIN_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git add ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
-          git commit -am "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
-          git pull --rebase;
-          git push;
+#      - name: Commit report
+#        run: |
+#          git config --global user.name '150z7248k3265x'
+#          git config --global user.email '929574375@qq.com'
+#          git remote set-url origin https://x-access-token:${{ secrets.KANGXIN_TOKEN }}@github.com/$GITHUB_REPOSITORY
+#          git add ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
+#          git commit -am "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
+#          git pull --rebase;
+#          git push;
 
-#      - uses: EndBug/add-and-commit@v7
-#        with:
-#          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
-#          add: ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml --force
+      - uses: EndBug/add-and-commit@v7
+        with:
+          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
+          add: ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml --force
+          pull: '--rebase'
+          push: true
 
 
 
