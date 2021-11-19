@@ -71,6 +71,8 @@ jobs:
               echo "Gave up after $attempts attempts";
           fi
 
+
+
 #      - uses: EndBug/add-and-commit@v7
 #        with:
 #          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
