@@ -61,8 +61,8 @@ jobs:
 
       - uses: EndBug/add-and-commit@v7
         with:
-          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
           add: ./${{ env.PROJECT_NAME }}/values-${{ env.CI_ENVIRONMENT_NAME }}-image.yaml
+          message: "Image: ${{ env.IMAGE_TAG }} of ${{ env.PROJECT_NAME }} in ${{ env.CI_ENVIRONMENT_NAME }}"
           pull: '--rebase'
           push: true
 
