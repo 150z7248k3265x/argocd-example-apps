@@ -1,0 +1,4 @@
+image:
+  tag: ffdsfsdfsdfsdfghfgh
+env: prod
+fullnameOverride: test-service
